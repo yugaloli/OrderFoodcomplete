@@ -1,6 +1,6 @@
 package com.brillicaservices.orderfood;
-
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.brillicaservices.orderfood.Common.Common;
 import com.brillicaservices.orderfood.Model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,31 +29,37 @@ public class SignIn extends AppCompatActivity {
         SignIn=(Button)findViewById(R.id.btnSignIn1);
         FirebaseDatabase database=FirebaseDatabase.getInstance();
         final DatabaseReference table_user=database.getReference("User");
-        //final ProgressDialog mDialog=new ProgressDialog(SignIn.this);
-        //mDialog.setMessage("Loading....");
+
         //mDialog.show();
         SignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                table_user.setValue(new ValueEventListener() {
+                final ProgressDialog mDialog=new ProgressDialog(SignIn.this);
+                mDialog.setMessage("Wait....");
+                mDialog.show();
+                table_user.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        //Get User Information
-                        //mDialog.dismiss();
-                        //if (dataSnapshot.child(editPhone.getText().toString()).exists()) {
+                            if (dataSnapshot.child(editPhone.getText().toString()).exists()) {
+                                mDialog.dismiss();
+                                User user = dataSnapshot.child(editPhone.getText().toString()).getValue(User.class);
+                                user.setPhone(editPhone.getText().toString());
+                                if (user.getPassword().equals(editPassword.getText().toString())) {
+                                    Intent basicHome =new Intent(SignIn.this,BasicHome.class);
+                                    Common.currentuser=user;
+                                    startActivity(basicHome);
+                                    finish();
+                                    //Toast.makeText(SignIn.this, "Sign in Success", Toast.LENGTH_LONG).show();
 
-                            User user = dataSnapshot.child(editPhone.getText().toString()).getValue(User.class);
-                            if (user.getPassword().equals(editPassword.getText().toString())) {
-                                Toast.makeText(SignIn.this, "Signed in Success", Toast.LENGTH_LONG).show();
-                            } else {
-                                Toast.makeText(SignIn.this, "Sign in Failed", Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(SignIn.this, "Sign in Failed", Toast.LENGTH_LONG).show();
+                                }
                             }
-                        //}
-                        //else{
-                            //mDialog.dismiss();
-                          //  Toast.makeText(SignIn.this, "User Not Exist", Toast.LENGTH_LONG).show();
-                        //}
-                    }
+                            else{
+                                mDialog.dismiss();
+                            Toast.makeText(SignIn.this, "User Not Exist", Toast.LENGTH_LONG).show();
+                            }
+                        }
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
 

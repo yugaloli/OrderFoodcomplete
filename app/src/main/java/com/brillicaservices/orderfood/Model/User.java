@@ -7,13 +7,23 @@ package com.brillicaservices.orderfood.Model;
 public class User {
     private String Name;
     private String Password;
-    public User(){}
+    private String Phone;
+
+    public String getPhone() {
+        return Phone;
+    }
+
+    public void setPhone(String phone) {
+        Phone = phone;
+    }
 
     public User(String name, String password) {
         Name = name;
         Password = password;
+
     }
 
+    public User(){}
     public String getName() {
         return Name;
     }

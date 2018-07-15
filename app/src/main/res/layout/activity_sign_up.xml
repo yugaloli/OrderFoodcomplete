@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.brillicaservices.orderfood.SignIn"
+    tools:context="com.brillicaservices.orderfood.SignUp"
     android:background="@drawable/bb">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="LOGIN"
+        android:text="SIGNUP"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="80dp"
         android:textSize="30dp"
@@ -20,37 +20,43 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_centerInParent="true"
-        android:id="@+id/linearLayout"
-        android:gravity="center">
+        android:id="@+id/linearLayout">
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/edtPhone"
             android:text="9557795840"
             android:textColor="@android:color/white"
             android:textSize="34sp"
-            android:inputType="phone"/>
+            android:inputType="phone"
+            android:gravity="center"/>
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edtName"
+            android:hint="Name"
+            android:textColor="@android:color/white"
+            android:textSize="34sp"
+            android:inputType="text"
+            android:gravity="center"/>
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/edtPassword"
             android:hint="Password"
             android:textColor="@android:color/white"
             android:textSize="34sp"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+            android:gravity="center"/>
         <info.hoang8f.widget.FButton
             android:layout_height="wrap_content"
-            android:id="@+id/btnSignIn1"
+            android:id="@+id/btnSignUp1"
             android:layout_marginRight="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="145dp"
             android:layout_centerHorizontal="true"
-            android:text="SignIn"
-            android:layout_weight="1"
+            android:text="SignUp"
             android:layout_width="wrap_content"
-            android:textColor="@android:color/white"
-            android:layout_marginTop="10dp"/>
-
+            android:textColor="@android:color/white" />
     </LinearLayout>
 
 </RelativeLayout>
